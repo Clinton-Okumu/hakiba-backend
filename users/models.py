@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.sql import func
 from app.database import Base
 from passlib.context import CryptContext
+from sqlalchemy.orm import relationship
 
 #password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -19,6 +20,9 @@ class User(Base):
     is_superuser = Column(Boolean, default=False)
     created_at = Column(String, default=func.now())
     updated_at = Column(String, default=func.now(), onupdate=func.now())
+
+    # Relationship to Customer
+    customer = relationship("Customer", back_populates="user", uselist=False)
 
     def set_pin(self, raw_pin: str):
         if not raw_pin:

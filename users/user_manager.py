@@ -2,7 +2,7 @@ from .models import User
 from app.database import SessionLocal
 
 class UserManager:
-    def create_user(self, full_name: str, phone_number: str, pin: str, id_number: str = None, **extra_fields):
+    def create_user(self, full_name: str, phone_number: str, pin: str, id_number: str, **extra_fields):
         if not full_name:
             raise ValueError("Full name is required")
         if not phone_number:
